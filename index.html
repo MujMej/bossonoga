@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BOSSONOGA - Prirodna njega iz male zanatske radionice. Ručno izrađena kozmetika sa biljnim maceratima i pažljivo biranim sastojcima iz Bosne i Hercegovine.">
+    <title>BOSSONOGA | Prirodna Ručno Izrađena Kozmetika</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="#home">
+                        <h1>BOSSONOGA</h1>
+                    </a>
+                </div>
+
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link">Početna</a></li>
+                    <li><a href="#collections" class="nav-link">Proizvodi</a></li>
+                    <li><a href="#process" class="nav-link">Kako nastaje</a></li>
+                    <li><a href="#botanicals" class="nav-link">Biljke</a></li>
+                    <li><a href="#about" class="nav-link">O brendu</a></li>
+                    <li><a href="#contact" class="nav-link">Kontakt</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <button class="cart-btn" id="cart-btn" aria-label="Korpa">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Meni">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">BOSSONOGA</h1>
+                <p class="hero-subtitle">Prirodna njega iz male zanatske radionice</p>
+                <p class="hero-tagline" style="font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-top: 0.5rem; font-style: italic;">
+                    Zastani, udahni, odmori
+                </p>
+
+                <div class="hero-features">
+                    <span class="feature-badge">Small batch kolekcije</span>
+                    <span class="feature-badge">Ručno izrađeno</span>
+                    <span class="feature-badge">Biljna baza</span>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#collections" class="btn btn-primary">Pogledaj proizvode</a>
+                    <a href="#about" class="btn btn-secondary">O brendu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="philosophy">
+        <div class="container">
+            <h2 class="section-title">Naša Filozofija</h2>
+
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3>Ručno izrađeno</h3>
+                    <p>Svaka serija nastaje u malim količinama, sa pažnjom prema svakom detalju i svakom sastojku.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Biljni macerati</h3>
+                    <p>Koristimo macerate ljekovitog bilja u pažljivo biranim baznim uljima, kao srce Bossonoga rituala njege.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Bez industrijskih dodataka</h3>
+                    <p>Bez masovne proizvodnje i bez suvišnog opterećenja formule. Samo ono što proizvodu zaista treba.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Njega sa svrhom</h3>
+                    <p>Svaki proizvod osmišljen je da bude mali ritual odmora, nježnosti i vraćanja sebi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <div class="container">
+            <h2 class="section-title">Naše Kolekcije</h2>
+
+            <!-- Bath Bombs -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Kupke za tijelo</h3>
+                    <p class="category-description">
+                        Šumeće kupke sa ljekovitim biljem. Rastvoriti u toploj vodi i uživati u ritualu njege.
+                    </p>
+                </div>
+                <div class="products-grid" id="bath-bombs-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Balms -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Balzami</h3>
+                    <p class="category-description">
+                        Prirodni ručno rađeni balzami za suhu i oštećenu kožu, namijenjeni njezi različitih dijelova tijela.
+                    </p>
+                </div>
+                <div class="products-grid" id="balms-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Refill Baths -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Refill kupke</h3>
+                    <p class="category-description">
+                        Prhka mješavina za kupanje sa više soli i bilja, idealna za lavor, veću količinu vode ili lično doziranje.
+                    </p>
+                </div>
+                <div class="products-grid" id="refill-baths-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Scrubs -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Pilinzi</h3>
+                    <p class="category-description">
+                        Prirodni pilinzi za njegu, masažu i uklanjanje mrtve kože. Varijante i veličine birate unutar proizvoda.
+                    </p>
+                </div>
+                <div class="products-grid" id="scrubs-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Foot Baths -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Kupke za stopala</h3>
+                    <p class="category-description">
+                        Pojedinačne kupke i paketi za kućni ritual njege stopala, uz mogućnost izbora omiljene varijante ili mix paketa.
+                    </p>
+                </div>
+                <div class="products-grid" id="foot-baths-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Gift Packages -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Poklon paketi</h3>
+                    <p class="category-description">
+                        Pažljivo sastavljeni Bossonoga poklon paketi za male rituale njege, poklone i posebne prilike.
+                    </p>
+                </div>
+                <div class="products-grid packages-grid" id="packages-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Kids Line -->
+            <div class="collection-category kids-special">
+                <div class="category-header">
+                    <h3 class="category-title">🦆 Dječija linija</h3>
+                    <p class="category-description">
+                        Šarena i razigrana Bossonoga kolekcija za djecu, sa patkicama kao malim iznenađenjem i posebnim kids karakterom.
+                    </p>
+                </div>
+                <div class="products-grid" id="kids-line-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Handmade Accessories -->
+            <div class="collection-category">
+                <div class="category-header">
+                    <h3 class="category-title">Cekeri & dodatna oprema</h3>
+                    <p class="category-description">
+                        Bossonoga cekeri, washcloth i pažljivo osmišljeni dodaci koji prate ritual njege i poklon pakete.
+                    </p>
+                </div>
+                <div class="products-grid" id="accessories-grid">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Limited Edition Banner -->
+    <section class="limited-edition">
+        <div class="container">
+            <div class="limited-content">
+                <i class="fas fa-star"></i>
+                <h3>Limited Edition serije</h3>
+                <p>Svaka serija proizvoda izrađuje se u ograničenim količinama, pa sljedeća serija može imati novu nijansu, drugačiji detalj ili osvježenu kombinaciju.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="about" id="process">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Kako nastaje proizvod</h2>
+                    <div class="about-description">
+                        <p><strong>Bossonoga proizvod</strong> ne nastaje brzo i ne nastaje nasumično.</p>
+                        <p>Početak je u bilju, mirisu, teksturi i ideji kakav osjećaj proizvod treba ostaviti na koži i u prostoru.</p>
+                        <p>Zatim slijedi odabir sastojaka, priprema macerata, kombinovanje biljnih nota, ručno oblikovanje, sušenje, punjenje, pakovanje i završna provjera svakog komada.</p>
+                        <p class="highlight">Biljka → macerat → formula → ručna izrada → pakovanje → mali ritual njege.</p>
+                        <p>Na taj način svaki proizvod zadržava lični karakter male radionice i osjećaj da nije nastao na traci, nego rukom.</p>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-mortar-pestle"></i>
+                        <p>Fotografija procesa izrade</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botanicals Section -->
+    <section class="philosophy" id="botanicals">
+        <div class="container">
+            <h2 class="section-title">Biljke & macerati</h2>
+
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Kamilica</h3>
+                    <p>Nježna i smirujuća biljka koja se često povezuje sa blagim formulama i umirujućim ritualima njege.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Ružmarin</h3>
+                    <p>Aromatična biljka snažnijeg karaktera, često prisutna u formulama koje žele dati osjećaj svježine i pokreta.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Veren & čuber</h3>
+                    <p>Biljne note koje Bossonoga liniji daju prepoznatljiv prirodan karakter i osjećaj domaće radionice.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-lemon"></i>
+                    </div>
+                    <h3>Narandža & menta</h3>
+                    <p>Svježije i vedrije note koje unose lakoću, citrusnu toplinu i osvježavajući završni utisak.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Ova sekcija je zamišljena kao mjesto gdje ćemo kasnije detaljno dodati svaku biljku posebno:
+                    kako raste, u kakvim uslovima uspijeva, kada se bere, kako se macerira i u kojim Bossonoga proizvodima se koristi.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">O Bossonogi</h2>
+                    <div class="about-description">
+                        <p><strong>Bossonoga</strong> je nastala iz potrebe da se prirodna njega vrati jednostavnosti, ritualu i osjećaju mira.</p>
+                        <p>Proizvodi se izrađuju ručno, u malim količinama, sa pažljivo biranim sastojcima i željom da svaka formula ima svoj karakter.</p>
+                        <p class="highlight">Nema masovne proizvodnje.<br>Nema velikih serija.<br>Samo mala radionica i posvećen rad.</p>
+                        <p>Iza svakog proizvoda stoji spoj prirode, nježnosti, tradicije i savremenog osjećaja za čisto, lijepo i lično.</p>
+                    </div>
+                </div>
+
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-spa"></i>
+                        <p>Fotografija radionice / brenda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shipping Info -->
+    <section class="philosophy" id="shipping">
+        <div class="container">
+            <h2 class="section-title">Dostava</h2>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Trenutno se Bossonoga najviše bazira na <strong>Banja Luci</strong> i lokalnom dogovoru oko preuzimanja ili dostave.
+                </p>
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Za dostavu putem pošte u BiH, planirana cijena poštarine je:
+                    <strong>8 KM</strong> za uplatu na račun i <strong>10 KM</strong> za plaćanje pouzećem.
+                </p>
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Konačna logika poštarine i načina plaćanja biće vidljiva i unutar checkout procesa.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Returns -->
+    <section class="philosophy" id="returns">
+        <div class="container">
+            <h2 class="section-title">Povrat</h2>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Ako proizvod stigne oštećen ili postoji problem sa narudžbom, potrebno je javiti se u što kraćem roku putem emaila ili WhatsApp poruke, uz fotografiju i kratak opis problema.
+                </p>
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Za ručno rađene proizvode male serije moguće su manje vizuelne razlike između serija, što je prirodan dio handmade procesa.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="philosophy" id="privacy">
+        <div class="container">
+            <h2 class="section-title">Privatnost</h2>
+
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Podaci koje kupac ostavi prilikom narudžbe koriste se isključivo za obradu narudžbe, kontakt i dostavu proizvoda.
+                </p>
+                <p style="font-size: 1rem; line-height: 1.9; color: #5c5c5c;">
+                    Bossonoga ne koristi podatke korisnika u svrhe koje nisu povezane sa narudžbom, komunikacijom ili podrškom kupcu.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Kontaktirajte nas</h2>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Lokacija</h4>
+                            <p>Fokus: Banja Luka, BiH</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>contact.bossonoga@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp narudžbe</h4>
+                            <p>Biće povezan sa posebnim Bossonoga brojem</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <h4>Dostava</h4>
+                            <p>Lokalno preuzimanje i Banja Luka prioritetno; pošta za BiH naknadno kroz checkout opcije</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Vaše ime" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Vaš email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder="Vaša poruka" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pošalji poruku</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BOSSONOGA</h3>
+                    <p>
+                        Prirodna njega iz male zanatske radionice<br>
+                        <em style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Zastani, udahni, odmori</em>
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Brzi linkovi</h4>
+                    <ul>
+                        <li><a href="#home">Početna</a></li>
+                        <li><a href="#collections">Proizvodi</a></li>
+                        <li><a href="#process">Kako nastaje</a></li>
+                        <li><a href="#botanicals">Biljke</a></li>
+                        <li><a href="#about">O brendu</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Informacije</h4>
+                    <ul>
+                        <li><a href="#shipping">Dostava</a></li>
+                        <li><a href="#returns">Povrat</a></li>
+                        <li><a href="#privacy">Privatnost</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Pratite nas</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/p/Bosso-Noga-61584590381612/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/bosso.noga" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 BOSSONOGA. Sva prava zadržana.</p>
+                <p style="margin-top: 0.5rem; font-style: italic; color: rgba(255,255,255,0.6);">with love, MujMej</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-overlay" id="cart-overlay"></div>
+        <div class="cart-sidebar">
+            <div class="cart-header">
+                <h3>Vaša korpa</h3>
+                <button class="close-cart" id="close-cart" aria-label="Zatvori korpu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="cart-items" id="cart-items">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Vaša korpa je prazna</p>
+                </div>
+            </div>
+
+            <div class="cart-footer" id="cart-footer" style="display: none;">
+                <div class="cart-total">
+                    <span>Ukupno:</span>
+                    <span class="total-price" id="total-price">0 KM</span>
+                </div>
+                <button class="btn btn-primary btn-block" id="checkout-btn">Naruči</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="product-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal" aria-label="Zatvori">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modal-body">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="modal-overlay" id="checkout-overlay"></div>
+        <div class="modal-content checkout-content">
+            <button class="close-modal" id="close-checkout" aria-label="Zatvori">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="checkout-body">
+                <h2>Potvrda narudžbe</h2>
+
+                <form class="checkout-form" id="checkout-form">
+                    <div class="form-section">
+                        <h3>Kontakt informacije</h3>
+
+                        <div class="form-group">
+                            <label for="checkout-name">Ime i prezime *</label>
+                            <input type="text" id="checkout-name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkout-email">Email *</label>
+                            <input type="email" id="checkout-email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkout-phone">Telefon *</label>
+                            <input type="tel" id="checkout-phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Adresa dostave</h3>
+
+                        <div class="form-group">
+                            <label for="checkout-address">Ulica i broj *</label>
+                            <input type="text" id="checkout-address" name="address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkout-city">Grad *</label>
+                            <input type="text" id="checkout-city" name="city" value="Banja Luka" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery-method">Način dostave *</label>
+                            <select id="delivery-method" name="deliveryMethod" required>
+                                <option value="local">Lokalno preuzimanje / dogovor (Banja Luka)</option>
+                                <option value="post">Dostava poštom (BiH)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment-method">Način plaćanja *</label>
+                            <select id="payment-method" name="paymentMethod" required>
+                                <option value="pouzece">Plaćanje pouzećem</option>
+                                <option value="racun">Uplata na račun</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkout-note">Napomena (opciono)</label>
+                            <textarea id="checkout-note" name="note" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3>Pregled narudžbe</h3>
+                        <div id="checkout-items"></div>
+                        <div class="summary-total">
+                            <span>Ukupno:</span>
+                            <span id="checkout-total">0 KM</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Potvrdi narudžbu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="success-message">
+        <i class="fas fa-check-circle"></i>
+        <span id="success-text">Uspješno dodato u korpu!</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
