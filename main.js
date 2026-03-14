@@ -252,14 +252,18 @@ function openProductModal(productId, category) {
     const limitedBadge = product.limited ? '<span class="limited-badge">Limited 30kom</span>' : '';
 
     const defaultVariant = hasVariants ? product.variants[0] : null;
-    const defaultSizeOption = hasSizeOptions ? product.sizeOptions[0] : null;
+    const defaultSizeOption = hasSizeOptions ? normalizeSizeOption(product.sizeOptions[0]) : null;
     const defaultPrice = getSelectedPrice(product, defaultSizeOption);
-    const defaultImage = getSelectedImage(product, defaultVariant);
+    const defaultImage = getSelectedImage(product, defaultVariant, defaultSizeOption);
+    const galleryMarkup = renderGallery(product, defaultVariant, defaultSizeOption);
 
     modalBody.innerHTML = `
-        <div class="modal-image" id="product-modal-image-wrapper">
-            ${renderModalImage(defaultImage, product.name, product.icon)}
-            ${limitedBadge}
+        <div>
+            <div class="modal-image" id="product-modal-image-wrapper">
+                ${renderModalImage(defaultImage, product.name, product.icon)}
+                ${limitedBadge}
+            </div>
+            ${galleryMarkup}
         </div>
 
         <div class="modal-details"
@@ -382,13 +386,14 @@ function updateModalDynamicContent(product) {
     const imageWrapper = document.getElementById('product-modal-image-wrapper');
     const priceElement = document.getElementById('modal-price');
     const descriptionElement = document.getElementById('modal-description');
+    const galleryContainer = document.getElementById('product-gallery');
 
     if (!imageWrapper || !priceElement || !descriptionElement) return;
 
     const selectedVariant = getSelectedVariant();
     const selectedSizeOption = getSelectedSizeOption();
 
-    const selectedImage = getSelectedImage(product, selectedVariant);
+    const selectedImage = getSelectedImage(product, selectedVariant, selectedSizeOption);
     const selectedPrice = getSelectedPrice(product, selectedSizeOption);
     const selectedDescription = getSelectedDescription(product, selectedVariant);
 
@@ -396,6 +401,10 @@ function updateModalDynamicContent(product) {
         ${renderModalImage(selectedImage, product.name, product.icon)}
         ${product.limited ? '<span class="limited-badge">Limited 30kom</span>' : ''}
     `;
+
+    if (galleryContainer) {
+        galleryContainer.outerHTML = renderGallery(product, selectedVariant, selectedSizeOption);
+    }
 
     priceElement.textContent = `${selectedPrice} KM`;
     descriptionElement.textContent = selectedDescription;
@@ -407,6 +416,52 @@ function renderModalImage(imagePath, productName, iconClass) {
     }
 
     return `<i class="fas ${iconClass || 'fa-leaf'}"></i>`;
+}
+
+function renderGallery(product, selectedVariant, selectedSizeOption) {
+    const galleryImages = getGalleryImages(product, selectedVariant, selectedSizeOption);
+
+    if (!galleryImages.length) return '';
+
+    return `
+        <div id="product-gallery" style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.9rem;">
+            ${galleryImages.map((imgPath, index) => `
+                <button
+                    type="button"
+                    onclick="setMainGalleryImage('${escapeJs(imgPath)}', '${escapeJs(product.name)}', '${escapeJs(product.icon || 'fa-leaf')}')"
+                    style="border:none; padding:0; background:none; cursor:pointer;">
+                    <img
+                        src="${imgPath}"
+                        alt="${escapeHtml(product.name)} ${index + 1}"
+                        style="width:72px; height:72px; object-fit:cover; border-radius:10px; border:1px solid rgba(0,0,0,0.08);">
+                </button>
+            `).join('')}
+        </div>
+    `;
+}
+
+function setMainGalleryImage(imagePath, productName, iconClass) {
+    const imageWrapper = document.getElementById('product-modal-image-wrapper');
+    if (!imageWrapper) return;
+
+    imageWrapper.innerHTML = renderModalImage(imagePath, productName, iconClass);
+}
+
+function getGalleryImages(product, selectedVariant, selectedSizeOption) {
+    const images = [];
+    const mainImage = getSelectedImage(product, selectedVariant, selectedSizeOption);
+
+    if (mainImage) images.push(mainImage);
+
+    if (Array.isArray(product.gallery)) {
+        product.gallery.forEach(img => {
+            if (img && !images.includes(img)) {
+                images.push(img);
+            }
+        });
+    }
+
+    return images;
 }
 
 function getSelectedVariant() {
@@ -424,7 +479,14 @@ function getSelectedSizeOption() {
     };
 }
 
-function getSelectedImage(product, variant) {
+function getSelectedImage(product, variant, selectedSizeOption) {
+    if (selectedSizeOption && product.sizeImages) {
+        const sizeKey = selectedSizeOption.label;
+        if (product.sizeImages[sizeKey]) {
+            return product.sizeImages[sizeKey];
+        }
+    }
+
     if (variant && product.variantImages && product.variantImages[variant]) {
         return product.variantImages[variant];
     }
@@ -455,10 +517,12 @@ function addToCartFromModal(productId, category) {
     const selectedVariant = getSelectedVariant();
     const selectedSizeOption = getSelectedSizeOption();
     const selectedPrice = getSelectedPrice(product, selectedSizeOption);
+    const selectedImage = getSelectedImage(product, selectedVariant, selectedSizeOption);
 
     const preparedProduct = {
         ...product,
-        price: selectedPrice
+        price: selectedPrice,
+        image: selectedImage
     };
 
     const cartOptions = {
