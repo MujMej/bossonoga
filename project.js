@@ -476,47 +476,43 @@ const products = {
     // DJEČIJA LINIJA
     // ========================================
 kidsLine: [
-
-{
-id: 'kids-duck-single',
-name: '🦆 Kupka sa Patkicom',
-price: 5,
-category: 'kidsLine',
-description: 'Vesela kupka za djecu sa skrivenom patkicom. Šarena i razigrana kupka koja pretvara kupanje u malu igru.',
-shortDescription: 'Šarena dječija kupka sa patkicom kao iznenađenjem.',
-details: 'Kupka za djecu sa zabavnim elementom iznenađenja. U svakoj kupki nalazi se mala patkica koja ostaje kao igračka.',
-limited: true,
-icon: 'fa-duck',
-image: 'images/patkica.jpg'
-},
-
-{
-id: 'kids-duck-real',
-name: '🦆 Kupka sa Patkicom – Real',
-price: 5,
-category: 'kidsLine',
-description: 'Dječija kupka sa patkicom u realnom obliku. Šarena, vesela i namijenjena dječijim ritualima kupanja.',
-shortDescription: 'Kupka sa patkicom u realnoj varijanti.',
-details: 'Ova verzija kupke sadrži patkicu drugačijeg oblika koja ostaje kao mala igračka nakon kupanja.',
-limited: true,
-icon: 'fa-duck',
-image: 'images/kids-patkice-real.png'
-},
-
-{
-id: 'kids-duck-pack',
-name: '🦆 Paket dječijih kupki',
-price: 18,
-category: 'kidsLine',
-description: 'Paket dječijih kupki sa više patkica za zabavan ritual kupanja.',
-shortDescription: 'Poklon paket dječijih kupki.',
-details: 'Paket dječijih kupki sa više patkica koji je idealan kao poklon ili za više kupanja.',
-limited: true,
-package: true,
-icon: 'fa-gift',
-image: 'images/kids-patkice-paket.png'
-}
-
+    {
+        id: 'kids-duckbomb-single',
+        name: '🦆 Duckbomb',
+        price: 5,
+        category: 'kidsLine',
+        description: 'Nježna kupka za djecu.',
+        shortDescription: 'Nježna kupka za djecu.',
+        details: 'Nježna kupka za djecu na bazi macerata kamilice, bez boja. Pažljivo osmišljena za mali ritual kupanja i igru.',
+        limited: true,
+        icon: 'fa-duck',
+        image: 'images/patkica.jpg'
+    },
+    {
+        id: 'kids-duck-surprise',
+        name: '🦆 Patka iznenađenja',
+        price: 0,
+        category: 'kidsLine',
+        description: 'Patka iznenađenja.',
+        shortDescription: 'U nekim patkicama krije se iznenađenje.',
+        details: 'U nekim patkicama krije se iznenađenje — figurica patkice koja svijetli u mraku, do koje dolaziš kada se postojeća duckbomb otopi. Nagradna igra: ako skupiš 5 patkica i pošalješ sliku, uz sljedeću narudžbu dobijaš gumenu patkicu gratis.',
+        limited: true,
+        icon: 'fa-star',
+        image: 'images/kids-patkice-real.png'
+    },
+    {
+        id: 'kids-duckbomb-pack',
+        name: '🦆 Paket 4 patkice',
+        price: 20,
+        category: 'kidsLine',
+        description: 'Paket od 4 dječije kupke.',
+        shortDescription: 'Paket 4 patkice za 20 KM.',
+        details: 'Paket sadrži 4 duckbomb kupke za djecu. Idealan kao poklon, za braću i sestre ili za više veselih kupanja.',
+        limited: true,
+        package: true,
+        icon: 'fa-gift',
+        image: 'images/kids-patkice-paket.png'
+    }
 ],
     // ========================================
     // CEKERI & OPREMA
