@@ -208,7 +208,7 @@ function createProductCard(product) {
                     ${
                         needsModal
                             ? `<button class="add-to-cart-btn" onclick="event.stopPropagation(); openProductModal('${escapeJs(product.id)}', '${escapeJs(product.category)}')">
-                                    <i class="fas fa-eye"></i> Pogledaj
+                                    <i class="fas ${product.custom ? 'fa-gift' : 'fa-eye'}"></i> ${product.custom ? 'Kreiraj' : 'Pogledaj'}
                                </button>`
                             : `<button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCartDirect('${escapeJs(product.id)}', '${escapeJs(product.category)}')">
                                     <i class="fas fa-shopping-bag"></i> Dodaj
@@ -221,6 +221,10 @@ function createProductCard(product) {
 }
 
 function getProductDisplayPrice(product) {
+    if (product.displayPrice) {
+        return product.displayPrice;
+    }
+
     if (Array.isArray(product.sizeOptions) && product.sizeOptions.length > 0) {
         const firstOption = product.sizeOptions[0];
         const lastOption = product.sizeOptions[product.sizeOptions.length - 1];
@@ -242,6 +246,11 @@ function getProductDisplayPrice(product) {
 function openProductModal(productId, category) {
     const product = findProduct(productId, category);
     if (!product) return;
+
+    if (product.custom && typeof openGiftBuilder === 'function') {
+        openGiftBuilder();
+        return;
+    }
 
     const modal = document.getElementById('product-modal');
     const modalBody = document.getElementById('modal-body');
@@ -544,6 +553,18 @@ function addToCartDirect(productId, category) {
 // ========================================
 // Helper Functions
 // ========================================
+function getAllProductsForGiftBuilder() {
+    return [
+        ...products.bathBombs,
+        ...products.balms,
+        ...products.refillBaths,
+        ...products.scrubs,
+        ...products.footBaths,
+        ...products.kidsLine,
+        ...products.accessories
+    ].filter(product => !product.custom);
+}
+
 function findProduct(productId, category) {
     let allProducts = [];
 
@@ -631,7 +652,18 @@ function handleContactSubmit(event) {
 
     console.log('Contact form submitted:', contactData);
 
-    alert(`Hvala ${contactData.name}!\n\nVaša poruka je primljena.\nOdgovorićemo vam uskoro na ${contactData.email}.`);
+    const subject = `Bossonoga kontakt - ${contactData.name}`;
+    const body = [
+        `Ime: ${contactData.name}`,
+        `Email: ${contactData.email}`,
+        '',
+        'Poruka:',
+        contactData.message
+    ].join('\n');
+
+    window.location.href = `mailto:contact.bossonoga@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    alert(`Hvala ${contactData.name}!\n\nOtvara se email poruka kako biste poslali upit.`);
 
     event.target.reset();
 }
