@@ -475,21 +475,49 @@ const products = {
     // ========================================
     // DJEČIJA LINIJA
     // ========================================
-    kidsLine: [
-        {
-            id: 'kids-duck',
-            name: '🦆 Kupka sa Patkicom',
-            price: 5,
-            category: 'kidsLine',
-            description: 'Vesela kupka za djecu sa skrivenom patkicom. Šarena, razigrana i pažljivo osmišljena za male rituale kupanja.',
-            shortDescription: 'Šarena dječija kupka sa patkicom kao iznenađenjem.',
-            details: 'Kupka za djecu sa nježnijim karakterom i zabavnim elementom iznenađenja. Patkice mogu postati kolekcionarski dio Bossonoga kids linije.',
-            limited: true,
-            icon: 'fa-duck',
-            image: 'images/kids-patkice.png'
-        }
-    ],
+kidsLine: [
 
+{
+id: 'kids-duck-single',
+name: '🦆 Kupka sa Patkicom',
+price: 5,
+category: 'kidsLine',
+description: 'Vesela kupka za djecu sa skrivenom patkicom. Šarena i razigrana kupka koja pretvara kupanje u malu igru.',
+shortDescription: 'Šarena dječija kupka sa patkicom kao iznenađenjem.',
+details: 'Kupka za djecu sa zabavnim elementom iznenađenja. U svakoj kupki nalazi se mala patkica koja ostaje kao igračka.',
+limited: true,
+icon: 'fa-duck',
+image: 'images/patkica.jpg'
+},
+
+{
+id: 'kids-duck-real',
+name: '🦆 Kupka sa Patkicom – Real',
+price: 5,
+category: 'kidsLine',
+description: 'Dječija kupka sa patkicom u realnom obliku. Šarena, vesela i namijenjena dječijim ritualima kupanja.',
+shortDescription: 'Kupka sa patkicom u realnoj varijanti.',
+details: 'Ova verzija kupke sadrži patkicu drugačijeg oblika koja ostaje kao mala igračka nakon kupanja.',
+limited: true,
+icon: 'fa-duck',
+image: 'images/kids-patkice-real.png'
+},
+
+{
+id: 'kids-duck-pack',
+name: '🦆 Paket dječijih kupki',
+price: 18,
+category: 'kidsLine',
+description: 'Paket dječijih kupki sa više patkica za zabavan ritual kupanja.',
+shortDescription: 'Poklon paket dječijih kupki.',
+details: 'Paket dječijih kupki sa više patkica koji je idealan kao poklon ili za više kupanja.',
+limited: true,
+package: true,
+icon: 'fa-gift',
+image: 'images/kids-patkice-paket.png'
+}
+
+],
     // ========================================
     // CEKERI & OPREMA
     // ========================================
