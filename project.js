@@ -486,7 +486,7 @@ kidsLine: [
         details: 'Nježna kupka za djecu na bazi macerata kamilice, bez boja. Pažljivo osmišljena za mali ritual kupanja i igru.',
         limited: true,
         icon: 'fa-duck',
-        image: 'images/kids-patkice-real.jpg'
+        image: 'images/kids-patkice-real.png'
     },
     {
         id: 'kids-duck-surprise',
@@ -498,7 +498,7 @@ kidsLine: [
         details: 'U nekim patkicama krije se iznenađenje — figurica patkice koja svijetli u mraku, do koje dolaziš kada se postojeća duckbomb otopi. Nagradna igra: ako skupiš 5 patkica i pošalješ sliku, uz sljedeću narudžbu dobijaš gumenu patkicu gratis.',
         limited: true,
         icon: 'fa-star',
-        image: 'images/patkica.png'
+        image: 'images/patkica.jpg'
     },
     {
         id: 'kids-duckbomb-pack',
