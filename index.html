@@ -185,7 +185,7 @@
                 <div class="category-header">
                     <h3 class="category-title">Poklon paketi</h3>
                     <p class="category-description">
-                        Klijent bira proizvode koje želi, a Bossonoga ih pažljivo spaja u jedan poklon paket. Minimalna vrijednost paketa je 35 KM, uz 1 feetbathbomb gratis.
+                        Kreirajte poklon paket po želji: izaberite proizvode, način pakovanja i ručno rađenu karticu, a sistem automatski obračunava cijenu i dodaje paket u korpu.
                     </p>
                 </div>
                 <div class="products-grid packages-grid" id="packages-grid"></div>
@@ -310,7 +310,7 @@
                 </div>
 
                 <div class="about-image">
-                    <img src="images/radionica.png" alt="Bossonoga radionica" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                    <img src="images/bathbomb-main.png" alt="Bossonoga proizvodi" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
                 </div>
             </div>
         </div>
@@ -395,7 +395,7 @@
                         <i class="fab fa-whatsapp"></i>
                         <div>
                             <h4>WhatsApp narudžbe</h4>
-                            <p>Biće povezan sa posebnim Bossonoga brojem</p>
+                            <p>Bossonoga broj se unosi u cart.js za direktne narudžbe</p>
                         </div>
                     </div>
 
@@ -553,13 +553,13 @@
                         <h3>Adresa dostave</h3>
 
                         <div class="form-group">
-                            <label for="checkout-address">Ulica i broj *</label>
-                            <input type="text" id="checkout-address" name="address" required>
+                            <label for="checkout-address">Ulica i broj</label>
+                            <input type="text" id="checkout-address" name="address">
                         </div>
 
                         <div class="form-group">
-                            <label for="checkout-city">Grad *</label>
-                            <input type="text" id="checkout-city" name="city" value="Banja Luka" required>
+                            <label for="checkout-city">Grad</label>
+                            <input type="text" id="checkout-city" name="city" value="Banja Luka">
                         </div>
 
                         <div class="form-group">
@@ -594,6 +594,72 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Potvrdi narudžbu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Gift Builder Modal -->
+    <div class="checkout-modal" id="gift-builder-modal">
+        <div class="modal-overlay" id="gift-builder-overlay"></div>
+        <div class="modal-content checkout-content">
+            <button class="close-modal" id="close-gift-builder" aria-label="Zatvori">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="checkout-body">
+                <h2>Kreiraj poklon paket</h2>
+                <p style="margin-bottom: 1rem; color: var(--grey);">
+                    Izaberite proizvode, zatim pakovanje i karticu. Gotov poklon paket se dodaje u korpu kao jedna stavka.
+                </p>
+
+                <form class="checkout-form" id="gift-builder-form">
+                    <div class="form-section">
+                        <h3>Izaberite proizvode</h3>
+                        <div class="form-group">
+                            <label for="gift-builder-products">Označite jedan ili više proizvoda *</label>
+                            <div id="gift-builder-products" class="gift-builder-products"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Pakovanje</h3>
+                        <div class="form-group">
+                            <label for="gift-package-type">Opcija pakovanja *</label>
+                            <select id="gift-package-type" name="giftPackageType" required>
+                                <option value="none">Bez posebne ambalaže (0 KM)</option>
+                                <option value="wrap">Samo poklon pakovanje (+2 KM)</option>
+                                <option value="card">Poklon pakovanje + ručno rađena kartica (+5 KM)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gift-recipient">Kome je poklon?</label>
+                            <input type="text" id="gift-recipient" name="giftRecipient" placeholder="Ime ili nadimak osobe">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gift-occasion">Povod / prilika</label>
+                            <input type="text" id="gift-occasion" name="giftOccasion" placeholder="Rođendan, godišnjica, 8. mart...">
+                        </div>
+
+                        <div class="form-group" id="gift-message-group">
+                            <label for="gift-message">Tekst / instrukcija za karticu</label>
+                            <textarea id="gift-message" name="giftMessage" rows="4" placeholder="Napišite poruku ili upute za ručno rađenu karticu"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="order-summary">
+                        <h3>Pregled poklon paketa</h3>
+                        <div id="gift-builder-summary"></div>
+                        <div class="summary-total">
+                            <span>Ukupno:</span>
+                            <span id="gift-builder-total">0 KM</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Dodaj poklon paket u korpu</button>
                 </form>
             </div>
         </div>
