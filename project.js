@@ -423,7 +423,7 @@ const products = {
             shortDescription: 'Pojedinačna kupka za stopala za kućni ritual njege.',
             limited: true,
             icon: 'fa-spa',
-            image: 'images/footbath-pack9.png'
+            image: 'images/Feetbathbombs.png'
         },
         {
             id: 'foot-package-9',
