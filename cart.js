@@ -4,7 +4,7 @@
 
 const BOSSONOGA_CONFIG = {
     orderEmail: 'contact.bossonoga@gmail.com',
-    whatsappNumber: '', // unesi broj bez znaka +, npr. 3876XXXXXXX
+    whatsappNumber: '38762456915', // unesi broj bez znaka +, npr. 3876XXXXXXX
     web3FormsAccessKey: '' // unesi Web3Forms access key za pravo automatsko slanje emaila
 };
 
