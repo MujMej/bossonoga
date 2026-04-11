@@ -4,8 +4,8 @@
 
 const BOSSONOGA_CONFIG = {
     orderEmail: 'contact.bossonoga@gmail.com',
-    whatsappNumber: '38762456915', 
-    web3FormsAccessKey: 'd5bd082d-7eb3-4587-8dd9-40c87e3d7d18' 
+    whatsappNumber: '38762456915',
+    web3FormsAccessKey: 'd5bd082d-7eb3-4587-8dd9-40c87e3d7d18'
 };
 
 class ShoppingCart {
@@ -26,7 +26,7 @@ class ShoppingCart {
         );
 
         if (existingItem) {
-            existingItem.quantity += 1;
+            existingItem.quantity += Number(options.quantity) || 1;
         } else {
             this.items.push({
                 id: product.id,
@@ -516,7 +516,9 @@ async function handleCheckoutSubmit(event) {
         return;
     }
 
-    const formData = new FormData(event.target);
+    const form = event.target;
+    const formData = new FormData(form);
+
     const deliveryMethod = formData.get('deliveryMethod') || 'local';
     const paymentMethod = formData.get('paymentMethod') || 'pouzece';
 
@@ -527,44 +529,59 @@ async function handleCheckoutSubmit(event) {
 
     const orderData = {
         customer: {
-            name: formData.get('name') || '',
-            email: formData.get('email') || '',
-            phone: formData.get('phone') || '',
-            address: formData.get('address') || '',
-            city: formData.get('city') || '',
-            note: formData.get('note') || ''
+            name: (formData.get('name') || '').trim(),
+            email: (formData.get('email') || '').trim(),
+            phone: (formData.get('phone') || '').trim(),
+            address: (formData.get('address') || '').trim(),
+            city: (formData.get('city') || '').trim(),
+            note: (formData.get('note') || '').trim()
         },
         deliveryMethod,
         paymentMethod,
-        items: cart.items,
+        items: [...cart.items],
         subtotal: cart.getSubtotal(),
         shipping: cart.getShippingCost(deliveryMethod, paymentMethod),
         total: cart.getTotal(deliveryMethod, paymentMethod),
         date: new Date().toISOString()
     };
 
-    const mailBody = buildPlainOrderMessage(orderData);
-    const emailSent = await sendOrderEmail(orderData, mailBody);
-    const whatsappOpened = openWhatsAppOrder(orderData);
+    const plainMessage = buildPlainOrderMessage(orderData);
 
+    // Otvori WhatsApp odmah dok je još user gesture aktivan
+    let whatsappOpened = false;
+    try {
+        whatsappOpened = openWhatsAppOrder(orderData);
+    } catch (error) {
+        console.error('Greška pri WhatsApp otvaranju:', error);
+    }
+
+    // Pokušaj automatskog email slanja
+    let emailSent = false;
+    try {
+        emailSent = await sendOrderEmail(orderData, plainMessage);
+    } catch (error) {
+        console.error('Greška pri email slanju:', error);
+    }
+
+    // Ako email nije prošao i WhatsApp nije otvoren, fallback na mail klijent
     if (!emailSent && !whatsappOpened) {
-        openMailtoFallback(orderData, mailBody);
+        openMailtoFallback(orderData, plainMessage);
     }
 
     alert(
-        `Hvala ${orderData.customer.name}!\n\n` +
+        `Hvala ${orderData.customer.name || 'na narudžbi'}!\n\n` +
         `Ukupan iznos: ${formatPrice(orderData.total)}.\n` +
-        `Ako niste podesili Web3Forms ključ, otvorit će se email nacrt umjesto automatskog slanja.`
+        `Narudžba je poslana na WhatsApp i email.`
     );
 
     cart.clear();
     closeCheckout();
-    event.target.reset();
+    form.reset();
     updateAddressFields();
 }
 
 async function sendOrderEmail(orderData, plainMessage) {
-    const accessKey = BOSSONOGA_CONFIG.web3FormsAccessKey.trim();
+    const accessKey = (BOSSONOGA_CONFIG.web3FormsAccessKey || '').trim();
     if (!accessKey) return false;
 
     try {
@@ -572,39 +589,52 @@ async function sendOrderEmail(orderData, plainMessage) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Accept: 'application/json'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 access_key: accessKey,
-                subject: `Bossonoga narudžba - ${orderData.customer.name}`,
-                from_name: 'Bossonoga sajt',
-                replyto: orderData.customer.email,
-                email: BOSSONOGA_CONFIG.orderEmail,
+                subject: `Nova Bossonoga narudžba - ${orderData.customer.name || 'Kupac'}`,
+                from_name: 'Bossonoga shop',
+                name: orderData.customer.name || 'Kupac',
+                email: orderData.customer.email || BOSSONOGA_CONFIG.orderEmail,
+                replyto: orderData.customer.email || BOSSONOGA_CONFIG.orderEmail,
                 message: plainMessage
             })
         });
 
+        if (!response.ok) {
+            console.error('Web3Forms HTTP greška:', response.status, response.statusText);
+            return false;
+        }
+
         const data = await response.json();
+        console.log('Web3Forms odgovor:', data);
+
         return Boolean(data && data.success);
     } catch (error) {
-        console.error('Greška pri slanju narudžbe:', error);
+        console.error('Greška pri slanju Web3Forms emaila:', error);
         return false;
     }
 }
 
 function openWhatsAppOrder(orderData) {
-    const whatsappNumber = BOSSONOGA_CONFIG.whatsappNumber.trim();
+    const whatsappNumber = (BOSSONOGA_CONFIG.whatsappNumber || '').replace(/\D/g, '');
     if (!whatsappNumber) return false;
 
     const whatsappMessage = buildWhatsAppMessage(orderData);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     return true;
 }
 
 function openMailtoFallback(orderData, plainMessage) {
-    const subject = `Bossonoga narudžba - ${orderData.customer.name}`;
-    const mailtoLink = `mailto:${encodeURIComponent(BOSSONOGA_CONFIG.orderEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(plainMessage)}`;
+    const subject = `Nova Bossonoga narudžba - ${orderData.customer.name || 'Kupac'}`;
+    const mailtoLink =
+        `mailto:${BOSSONOGA_CONFIG.orderEmail}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(plainMessage)}`;
+
     window.location.href = mailtoLink;
 }
 
@@ -625,9 +655,9 @@ function buildPlainOrderMessage(orderData) {
     return [
         'Nova Bossonoga narudžba',
         '',
-        `Ime i prezime: ${orderData.customer.name}`,
-        `Email: ${orderData.customer.email}`,
-        `Telefon: ${orderData.customer.phone}`,
+        `Ime i prezime: ${orderData.customer.name || 'Nije uneseno'}`,
+        `Email: ${orderData.customer.email || 'Nije unesen'}`,
+        `Telefon: ${orderData.customer.phone || 'Nije unesen'}`,
         `Adresa: ${orderData.customer.address || 'Lično preuzimanje / dogovor'}`,
         `Grad: ${orderData.customer.city || 'Banja Luka'}`,
         `Način dostave: ${getDeliveryMethodLabel(orderData.deliveryMethod)}`,
@@ -766,7 +796,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const paymentMethodField = document.getElementById('payment-method');
 
     const giftBuilderOpenButtons = document.querySelectorAll('[data-open-gift-builder]');
-    const giftBuilderModal = document.getElementById('gift-builder-modal');
     const giftBuilderOverlay = document.getElementById('gift-builder-overlay');
     const closeGiftBuilderBtn = document.getElementById('close-gift-builder');
     const giftBuilderForm = document.getElementById('gift-builder-form');
@@ -795,6 +824,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeGiftBuilderBtn) closeGiftBuilderBtn.addEventListener('click', closeGiftBuilder);
     if (giftBuilderForm) giftBuilderForm.addEventListener('submit', handleGiftBuilderSubmit);
     if (giftPackageTypeField) giftPackageTypeField.addEventListener('change', updateGiftBuilderSummary);
+
+    giftBuilderOpenButtons.forEach(button => {
+        button.addEventListener('click', openGiftBuilder);
+    });
 
     document.addEventListener('change', event => {
         if (event.target.classList.contains('gift-product-checkbox')) {
