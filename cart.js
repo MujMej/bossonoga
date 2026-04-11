@@ -4,8 +4,8 @@
 
 const BOSSONOGA_CONFIG = {
     orderEmail: 'contact.bossonoga@gmail.com',
-    whatsappNumber: '38762456915', // unesi broj bez znaka +, npr. 3876XXXXXXX
-    web3FormsAccessKey: '' // unesi Web3Forms access key za pravo automatsko slanje emaila
+    whatsappNumber: '38762456915', 
+    web3FormsAccessKey: 'd5bd082d-7eb3-4587-8dd9-40c87e3d7d18' 
 };
 
 class ShoppingCart {
